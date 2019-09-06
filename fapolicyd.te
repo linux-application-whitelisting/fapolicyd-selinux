@@ -1,0 +1,60 @@
+policy_module(fapolicyd, 1.0.0)
+
+########################################
+#
+# Declarations
+#
+
+type fapolicyd_t;
+type fapolicyd_exec_t; 
+init_daemon_domain(fapolicyd_t, fapolicyd_exec_t)
+
+type fapolicyd_var_lib_t;
+files_type(fapolicyd_var_lib_t)
+
+type fapolicyd_log_t;
+logging_log_file(fapolicyd_log_t)
+
+type fapolicyd_var_run_t;
+files_pid_file(fapolicyd_var_run_t)
+
+########################################
+#
+# fapolicyd local policy
+#
+allow fapolicyd_t self:capability { audit_write chown dac_override setgid setuid sys_admin sys_nice sys_ptrace };
+allow fapolicyd_t self:fifo_file rw_fifo_file_perms;
+allow fapolicyd_t self:process { setcap setsched };
+allow fapolicyd_t self:unix_stream_socket create_stream_socket_perms;
+allow fapolicyd_t self:unix_dgram_socket create_socket_perms;
+
+manage_files_pattern(fapolicyd_t, fapolicyd_log_t, fapolicyd_log_t)
+logging_log_filetrans(fapolicyd_t, fapolicyd_log_t, file)
+
+manage_dirs_pattern(fapolicyd_t, fapolicyd_var_lib_t, fapolicyd_var_lib_t)
+manage_files_pattern(fapolicyd_t, fapolicyd_var_lib_t, fapolicyd_var_lib_t)
+manage_lnk_files_pattern(fapolicyd_t, fapolicyd_var_lib_t, fapolicyd_var_lib_t)
+mmap_read_files_pattern(fapolicyd_t, fapolicyd_var_lib_t, fapolicyd_var_lib_t)
+files_var_lib_filetrans(fapolicyd_t, fapolicyd_var_lib_t, { dir file lnk_file })
+
+manage_dirs_pattern(fapolicyd_t, fapolicyd_var_run_t, fapolicyd_var_run_t)
+manage_files_pattern(fapolicyd_t, fapolicyd_var_run_t, fapolicyd_var_run_t)
+manage_fifo_files_pattern(fapolicyd_t, fapolicyd_var_run_t,fapolicyd_var_run_t)
+manage_lnk_files_pattern(fapolicyd_t, fapolicyd_var_run_t, fapolicyd_var_run_t)
+files_pid_filetrans(fapolicyd_t, fapolicyd_var_run_t, { dir file lnk_file })
+
+kernel_dgram_send(fapolicyd_t)
+
+auth_read_passwd(fapolicyd_t)
+
+domain_read_all_domains_state(fapolicyd_t)
+
+files_mmap_usr_files(fapolicyd_t)
+files_read_all_files(fapolicyd_t)
+fs_getattr_xattr_fs(fapolicyd_t)
+
+logging_send_syslog_msg(fapolicyd_t)
+
+optional_policy(`
+        rpm_read_db(fapolicyd_t)        
+')
