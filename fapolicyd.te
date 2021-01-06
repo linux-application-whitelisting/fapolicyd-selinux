@@ -64,7 +64,10 @@ files_read_all_files(fapolicyd_t)
 fs_getattr_xattr_fs(fapolicyd_t)
 
 logging_send_syslog_msg(fapolicyd_t)
+dbus_system_bus_client(fapolicyd_t)
 
 optional_policy(`
-        rpm_read_db(fapolicyd_t)        
+        rpm_read_db(fapolicyd_t)
+        allow fapolicyd_t rpm_var_lib_t:file { create };
+        allow fapolicyd_t rpm_var_lib_t:dir { add_name write };
 ')
