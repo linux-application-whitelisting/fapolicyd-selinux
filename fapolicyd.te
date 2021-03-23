@@ -52,6 +52,8 @@ manage_lnk_files_pattern(fapolicyd_t, fapolicyd_var_run_t, fapolicyd_var_run_t)
 files_pid_filetrans(fapolicyd_t, fapolicyd_var_run_t, { dir file fifo_file lnk_file })
 
 kernel_dgram_send(fapolicyd_t)
+kernel_read_all_sysctls(fapolicyd_t)
+kernel_read_all_proc(fapolicyd_t)
 
 auth_read_passwd(fapolicyd_t)
 
