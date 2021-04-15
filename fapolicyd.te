@@ -36,6 +36,12 @@ allow fapolicyd_t self:process { setcap setsched };
 allow fapolicyd_t self:unix_stream_socket create_stream_socket_perms;
 allow fapolicyd_t self:unix_dgram_socket create_socket_perms;
 
+gen_require(`
+	attribute file_type;
+')
+allow fapolicyd_t file_type:dir { watch_mount watch_with_perm };
+allow fapolicyd_t file_type:file { watch_mount watch_with_perm };
+
 manage_files_pattern(fapolicyd_t, fapolicyd_log_t, fapolicyd_log_t)
 logging_log_filetrans(fapolicyd_t, fapolicyd_log_t, file)
 
