@@ -92,6 +92,5 @@ userdom_watch_with_perm_tmp_dirs(fapolicyd_t)
 
 optional_policy(`
         rpm_read_db(fapolicyd_t)
-        allow fapolicyd_t rpm_var_lib_t:file { create };
-        allow fapolicyd_t rpm_var_lib_t:dir { add_name write };
+        rpm_manage_db(fapolicyd_t)
 ')
