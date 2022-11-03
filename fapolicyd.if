@@ -177,3 +177,133 @@ interface(`fapolicyd_admin',`
 		systemd_read_fifo_file_passwd_run($1)
 	')
 ')
+
+########################################
+# 
+# Fapolicy interface compatibility blocks
+#
+# The following definitions ensure compatibility with distribution policy
+# versions that do not contain given interfaces (epel, or older Fedora
+# releases).
+# Each block tests for existence of given interface and defines it if needed.
+#
+
+########################################
+## <summary>
+##	Watch all filesystems.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+ifndef(`fs_watch_all_fs',`
+	interface(`fs_watch_all_fs',`
+		gen_require(`
+			attribute filesystem_type;
+		')
+
+		allow $1 filesystem_type:filesystem watch;
+	')
+')
+
+########################################
+## <summary>
+##      Watch_sb root directories.
+## </summary>
+## <param name="domain">
+##      <summary>
+##      Domain allowed access.
+##      </summary>
+## </param>
+#
+ifndef(`files_watch_sb_root_dirs', `
+	interface(`files_watch_sb_root_dirs', `
+		gen_require(`
+			type root_t;
+		')
+
+		allow $1 root_t:dir watch_sb;
+	')
+')
+
+########################################
+## <summary>
+##      Watch_sb boot directories.
+## </summary>
+## <param name="domain">
+##      <summary>
+##      Domain allowed access.
+##      </summary>
+## </param>
+#
+ifndef(`files_watch_sb_boot_dirs', `
+	interface(`files_watch_sb_boot_dirs', `
+		gen_require(`
+			type boot_t;
+		')
+
+		allow $1 boot_t:dir watch_sb;
+	')
+')
+
+########################################
+## <summary>
+##     Watch_sb dirs on a DOS filesystem.
+## </summary>
+## <param name="domain">
+#     <summary>
+##     Domain allowed access.
+##     </summary>
+## </param>
+#
+ifndef(`fs_watch_sb_dos_dirs', `
+	interface(`fs_watch_sb_dos_dirs', `
+		gen_require(`
+			type dosfs_t;
+		')
+
+		allow $1 dosfs_t:dir watch_sb;
+	')
+')
+
+########################################
+## <summary>
+##      Watch_sb tmpfs directories.
+## </summary>
+## <param name="domain">
+##      <summary>
+##      Domain allowed access.
+##      </summary>
+## </param>
+#
+ifndef(`fs_watch_sb_tmpfs', `
+	interface(`fs_watch_sb_tmpfs', `
+		gen_require(`
+			type tmpfs_t;
+		 ')
+
+		allow $1 tmpfs_t:dir watch_sb;
+	')
+')
+
+#######################################
+## <summary>
+##      Watch_sb user temporary directories
+## </summary>
+## <param name="domain">
+##      <summary>
+##      Domain allowed access.
+##      </summary>
+## </param>
+#
+ifndef(`userdom_watch_sb_tmp_dirs',`
+	interface(`userdom_watch_sb_tmp_dirs',`
+		gen_require(`
+			type user_tmp_t;
+		')
+
+		allow $1 user_tmp_t:dir watch_sb;
+	')
+')
