@@ -38,9 +38,14 @@ allow fapolicyd_t self:unix_dgram_socket create_socket_perms;
 
 gen_require(`
 	attribute file_type;
+    attribute filesystem_type;
+    attribute mountpoint;
 ')
 allow fapolicyd_t file_type:dir { watch_mount watch_with_perm };
 allow fapolicyd_t file_type:file { watch_mount watch_with_perm };
+
+allow fapolicyd_t filesystem_type : filesystem { watch };
+allow fapolicyd_t mountpoint : dir { watch_sb };
 
 manage_files_pattern(fapolicyd_t, fapolicyd_log_t, fapolicyd_log_t)
 logging_log_filetrans(fapolicyd_t, fapolicyd_log_t, file)
