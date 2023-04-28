@@ -41,7 +41,8 @@ gen_require(`
     attribute filesystem_type;
     attribute mountpoint;
 ')
-allow fapolicyd_t file_type:dir { watch_mount watch_with_perm };
+watch_mount_dirs_pattern(fapolicyd_t, file_type,  file_type)
+watch_with_perm_dirs_pattern(fapolicyd_t, file_type,  file_type)
 allow fapolicyd_t file_type:file { watch_mount watch_with_perm };
 
 allow fapolicyd_t filesystem_type : filesystem { watch };
