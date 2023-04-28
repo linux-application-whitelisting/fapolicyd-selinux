@@ -45,7 +45,7 @@ watch_mount_dirs_pattern(fapolicyd_t, file_type,  file_type)
 watch_with_perm_dirs_pattern(fapolicyd_t, file_type,  file_type)
 allow fapolicyd_t file_type:file { watch_mount watch_with_perm };
 
-allow fapolicyd_t filesystem_type : filesystem { watch };
+fs_watch_all_fs(fapolicyd_t)
 allow fapolicyd_t mountpoint : dir { watch_sb };
 
 manage_files_pattern(fapolicyd_t, fapolicyd_log_t, fapolicyd_log_t)
