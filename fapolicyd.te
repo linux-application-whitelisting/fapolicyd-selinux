@@ -53,6 +53,8 @@ ifdef(`fs_watch_all_fs',`
     files_watch_sb_all_mountpoints(fapolicyd_t)
 ')
 
+allow fapolicyd_t file_type : lnk_file { getattr read };
+
 manage_files_pattern(fapolicyd_t, fapolicyd_log_t, fapolicyd_log_t)
 logging_log_filetrans(fapolicyd_t, fapolicyd_log_t, file)
 
