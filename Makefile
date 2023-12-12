@@ -35,6 +35,7 @@ man: install-policy
 
 install-policy: all
 	semodule -i ${TARGETS}.pp.bz2
+	semodule -i fapolicyd-hardening.cil
 
 install: man
 	install -D -m 644 ${TARGETS}.pp.bz2 ${DESTDIR}${SHAREDIR}/selinux/packages/${TARGETS}.pp.bz2

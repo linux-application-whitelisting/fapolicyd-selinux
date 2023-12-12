@@ -1,0 +1,1 @@
+(deny domain fapolicyd_t ( process ( ptrace sigkill sigstop ) ) )
