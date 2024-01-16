@@ -75,6 +75,7 @@ kernel_read_all_sysctls(fapolicyd_t)
 kernel_read_all_proc(fapolicyd_t)
 
 auth_read_passwd(fapolicyd_t)
+samba_stream_connect_winbind(fapolicyd_t)
 
 corecmd_exec_bin(fapolicyd_t)
 
