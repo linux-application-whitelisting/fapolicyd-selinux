@@ -94,6 +94,8 @@ optional_policy(`
         rpm_manage_db(fapolicyd_t)
 ')
 
-optional_policy(`
-	systemd_userdbd_stream_connect(fapolicyd_t)
+ifdef(`systemd_userdbd_stream_connect',`
+	optional_policy(`
+		systemd_userdbd_stream_connect(fapolicyd_t)
+	')
 ')
