@@ -99,3 +99,7 @@ ifdef(`systemd_userdbd_stream_connect',`
 		systemd_userdbd_stream_connect(fapolicyd_t)
 	')
 ')
+
+optional_policy(`
+    systemd_homed_stream_connect(fapolicyd_t)
+')
