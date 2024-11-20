@@ -100,6 +100,8 @@ ifdef(`systemd_userdbd_stream_connect',`
 	')
 ')
 
-optional_policy(`
-    systemd_homed_stream_connect(fapolicyd_t)
+ifdef(`systemd_homed_stream_connect',`
+	optional_policy(`
+		systemd_homed_stream_connect(fapolicyd_t)
+	')
 ')
