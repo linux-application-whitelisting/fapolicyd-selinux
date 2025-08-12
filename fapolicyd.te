@@ -55,7 +55,6 @@ ifdef(`fs_watch_all_fs',`
 
 allow fapolicyd_t file_type : lnk_file { getattr read };
 allow fapolicyd_t var_run_t:dir setattr;
-allow fapolicyd_t tmpfs_t:file write;
 
 manage_files_pattern(fapolicyd_t, fapolicyd_log_t, fapolicyd_log_t)
 logging_log_filetrans(fapolicyd_t, fapolicyd_log_t, file)
@@ -87,6 +86,7 @@ files_mmap_all_files(fapolicyd_t)
 files_read_all_files(fapolicyd_t)
 
 fs_getattr_xattr_fs(fapolicyd_t)
+fs_rw_inherited_tmpfs_files(fapolicyd_t)
 
 logging_send_syslog_msg(fapolicyd_t)
 dbus_system_bus_client(fapolicyd_t)
