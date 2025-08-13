@@ -106,3 +106,9 @@ ifdef(`systemd_homed_stream_connect',`
 		systemd_homed_stream_connect(fapolicyd_t)
 	')
 ')
+
+ifdef(`systemd_machined_stream_connect',`
+ 	optional_policy(`
+		systemd_machined_stream_connect(fapolicyd_t)
+ 	')
+')
