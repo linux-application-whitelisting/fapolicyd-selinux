@@ -40,6 +40,7 @@ gen_require(`
 	attribute file_type;
     attribute filesystem_type;
     attribute mountpoint;
+    type var_run_t;
 ')
 
 ifdef(`watch_mount_dirs_pattern',`
@@ -54,6 +55,7 @@ ifdef(`fs_watch_all_fs',`
 ')
 
 allow fapolicyd_t file_type : lnk_file { getattr read };
+allow fapolicyd_t var_run_t:dir setattr;
 
 manage_files_pattern(fapolicyd_t, fapolicyd_log_t, fapolicyd_log_t)
 logging_log_filetrans(fapolicyd_t, fapolicyd_log_t, file)
