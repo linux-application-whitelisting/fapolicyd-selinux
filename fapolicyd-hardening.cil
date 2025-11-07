@@ -1,4 +1,4 @@
 (optional fapolicyd_hardening_optional
     (typeattributeset cil_gen_require fapolicyd_t)
-    (deny domain fapolicyd_t ( process ( ptrace sigkill sigstop ) ) )
+    (deny domain fapolicyd_t ( process ( ptrace sigstop ) ) )
 )
