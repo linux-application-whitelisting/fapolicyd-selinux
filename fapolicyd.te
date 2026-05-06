@@ -86,7 +86,7 @@ domain_read_all_domains_state(fapolicyd_t)
 files_mmap_all_files(fapolicyd_t)
 files_read_all_files(fapolicyd_t)
 
-fs_getattr_xattr_fs(fapolicyd_t)
+fs_getattr_all_fs(fapolicyd_t)
 fs_rw_inherited_tmpfs_files(fapolicyd_t)
 
 logging_send_syslog_msg(fapolicyd_t)
