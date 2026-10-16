@@ -16,6 +16,8 @@
 TARGETS?=fapolicyd
 MODULES?=${TARGETS:=.pp.bz2}
 SHAREDIR?=/usr/share
+DIST_VERSION?=$(shell cat VERSION)
+DIST_NAME?=fapolicyd-selinux-$(DIST_VERSION)
 
 all: ${TARGETS:=.pp.bz2}
 
@@ -29,6 +31,10 @@ all: ${TARGETS:=.pp.bz2}
 clean:
 	rm -f *~  *.tc *.pp *.pp.bz2
 	rm -rf tmp *.tar.gz
+
+dist:
+	@echo Creating $(DIST_NAME).tar.gz
+	git archive --format=tar.gz --prefix=$(DIST_NAME)/ -o $(DIST_NAME).tar.gz HEAD
 
 man: install-policy
 	sepolicy manpage --path . --domain ${TARGETS}_t
